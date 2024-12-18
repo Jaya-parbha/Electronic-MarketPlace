@@ -169,7 +169,7 @@ nav a:hover {
 } 
 
 .slider img:nth-child(4) { 
-    animation-delay: 10s; 
+    animation-delay: 15s; 
 } 
  
 @keyframes slide { 
