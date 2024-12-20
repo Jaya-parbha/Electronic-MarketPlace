@@ -1,45 +1,41 @@
-// let currentIndex = 0;
-
-// const slider = document.querySelector('.slider');
-// const slides = document.querySelectorAll('.img_slider');
-// const totalSlides = slides.length;
-
-// function nextSlide() {
-//     currentIndex = (currentIndex + 1) % totalSlides;
-//     updateSliderPosition();
-// }
-
-// function prevSlide() {
-//     currentIndex = (currentIndex - 1) % totalSlides;
-//     updateSliderPosition();
-// }
-
-// function updateSliderPosition() {
-//     const offset= -currentIndex * 100;
-//     slider.style.transform = `translateX(${offset}%)`;
-// }
-
-// function stopAutoSlide() {
-//     clearInterval(autoSlideInterval);
-// }
-
-// const autoSlideInterval = setInterval(nextSlide, 5000); 
 
 
-var slideIndex = 0;
-var slides = document.querySelectorAll('.slider img');
+// Attach click event to each image
+       document.querySelectorAll('.offer-image').forEach(image => {
+            image.addEventListener('click', function() {
+                const imageSrc = image.src;
+                const description = image.nextElementSibling.textContent;
 
-function showSlides() {
-slideIndex++;
-if (slideIndex >= slides.length) {
-slideIndex = 0;
+                // Store both image and description in sessionStorage
+                sessionStorage.setItem('selectedImage', imageSrc);
+                sessionStorage.setItem('selectedDescription', description);
+
+                // Redirect to the cart page
+                window.location.href = 'product.html';
+            });
+        });
+
+
+const slider = document.querySelector('.slider');
+const images = document.querySelectorAll('.img_slider');
+const prevButton = document.querySelector('.nav-button.left');
+const nextButton = document.querySelector('.nav-button.right');
+
+let currentIndex = 0;
+
+// Function to update the slider position
+function updateSliderPosition() {
+    slider.style.transform = `translateX(-${currentIndex * 100}%)`;
 }
 
-for (var i = 0; i < slides.length; i++) {
-slides[i].classList.remove('active');
-}
+// Event listener for the next button
+nextButton.addEventListener('click', () => {
+    currentIndex = (currentIndex + 1) % images.length;
+    updateSliderPosition();
+});
 
-slides[slideIndex].classList.add('active');
-}
-
-setInterval(showSlides, 5000);
+// Event listener for the previous button
+prevButton.addEventListener('click', () => {
+    currentIndex = (currentIndex - 1 + images.length) % images.length;
+    updateSliderPosition();
+});

@@ -49,3 +49,17 @@ addToCartButton.addEventListener('click', () => {
   const quantity = document.querySelector('#quantity').value;
   alert(`Added ${quantity} item(s) to your cart!`);
 });
+
+
+ // Get the selected image from sessionStorage
+        const selectedImage = sessionStorage.getItem('selectedImage');
+        const selectedDescription = sessionStorage.getItem('selectedDescription');
+        
+
+        if (selectedImage  && selectedDescription) {
+            // Display the selected image on the cart page
+            document.getElementById('cart-image').src = selectedImage;
+            document.getElementById('description').textContent = selectedDescription;
+        } else {
+            document.getElementById('description').alt = "No product selected.";
+        }
